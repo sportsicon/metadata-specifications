@@ -10,6 +10,8 @@ These meta specifications are used for to provide informal structure to the unst
 - Media metadata
 - Athlete metadata 
 
+We aren't including anti-piracy and 2-way links at this time. 
+
 ## The Data Flow
 
 Read up on [dynamic NFTs](https://github.com/trustenterprises/hedera-dnft-specification) to understand the process but we have a base format which connects a token to a HCS topic.
@@ -47,4 +49,29 @@ Below is the basic format for a SportsIcon metadata message. A message must:
 
 ### Athlete Metadata
 
+An athlete is an entity which describes an individual athlete, this is the payload which is present inside of the **data** field. 
+
+- Have a **name** of the athlete
+- Have a **resource** which connects to the SportsIcon athlete resource as a url 
+
+```
+{
+    "name": "Matt Smithies",
+    "resource": "{{domain}}/athlete/1" 
+}
+```
+ 
+
 ### Media
+
+Media is content that is linked to a NFT token, in the basic form content is a url from a NFT to a IPFS and s3 URL in the future we will add capacity for the media to link back to the NFT through the use of Exif metadata tags to generate a unique hash.  
+
+- Have a **cid** of the ipfs storage [content addressing](https://docs.ipfs.io/concepts/content-addressing/#identifier-formats)
+- Have a **s3** link which is a link to media through SportIcons AWS
+
+```
+{
+    "cid": "QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR",
+    "s3": "{{s3 public url}}"
+}
+```
